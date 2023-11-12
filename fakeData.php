@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 require __DIR__ . '/userTable.php';
 require __DIR__ . '/adressTable.php';
-require __DIR__ . '/productTable.php';
+include_once 'productTable.php';
 require __DIR__ . '/cartTable.php';
 
 // Import the Faker namespace
@@ -25,7 +25,8 @@ if ($conn->connect_error) {
 
 //userGen($faker, $conn);
 //adressGen($faker,$conn,getUserId($conn));
-getCartId($conn);
+getProductName($conn,11);
+cartGen($faker,$conn,getRandomUserId($conn));
 
 
 // Close the database connection when done

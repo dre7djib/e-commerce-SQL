@@ -1,28 +1,62 @@
 <?php
 
+include_once 'productTable.php';
+
 function getCartId($conn){
     // Get Product Names
     $query = "SELECT cartId FROM cart";
     $result = $conn->query($query);
     
     if ($result) {
-        $cart = array(); // Crée un tableau pour stocker les noms des produits
+        $cart = array(); 
 
         while ($row = $result->fetch_assoc()) {
-            $cart[] = $row['cartId']; // Ajoute le nom du produit au tableau
+            $cart[] = $row['cartId'];
         }
 
-        // Imprime les noms des produits
         print_r($cart);
 
-        $result->close(); // Ferme le résultat
+        $result->close();
     } else {
         echo "Erreur lors de l'exécution de la requête : " . $conn->error;
     }
     return $cart;
 }
 
+function cartGen($faker, $conn, $userId) {
+    $order = rand(0, 3);
+    
+    $insert_query = "INSERT INTO cart (userId, productId, quantity) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($insert_query);
 
+    if (!$stmt) {
+        echo "Erreur de préparation de la requête : " . $conn->error;
+        return;
+    }
 
+    for ($i = 1; $i <= $order; $i++) {
+        $quantity = rand(1, 3);
+
+        for ($j = 1; $j <= $quantity; $j++) {
+            $maxProductId = intval(getMaxProductId($conn));
+            $productId = rand(0, $maxProductId);
+            $name = getProductName($conn, $productId);
+
+            if (!$stmt) {
+                echo "Erreur de préparation de la requête : " . $conn->error;
+                return;
+            }
+
+            $userId = intval($userId);
+
+            $stmt->bind_param("iii", $userId, $productId, $quantity);
+            $stmt->execute();
+
+            echo $userId . " " . $productId . " " . $quantity . " " . $name . " ";
+        }
+    }
+
+    $stmt->close();
+}
 
 ?>
