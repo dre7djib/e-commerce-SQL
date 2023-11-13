@@ -72,6 +72,22 @@ function getProductName($conn,$productId){
     return $products;
 }
 
+function getRandomProductId($conn){
+    // Get User Id 
+    $query = "SELECT MAX(productId) FROM product";
+    $result = $conn->query($query);
+    
+    if ($result) {
+        $row = $result->fetch_row(); // Récupère la première colonne du résultat
+        $maxProductId = $row[0]; // Stocke la valeur maximale dans une variable
+        $result->close(); // Ferme le résultat
+    } else {
+        echo "Erreur lors de l'exécution de la requête : " . $conn->error;
+    }
+    $randomProductId = rand(1,intval($maxProductId));
+    return $randomProductId;
+}
+
 
 
 ?>

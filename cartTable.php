@@ -3,7 +3,6 @@
 include_once 'productTable.php';
 
 function getCartId($conn){
-    // Get Product Names
     $query = "SELECT cartId FROM cart";
     $result = $conn->query($query);
     
@@ -24,7 +23,7 @@ function getCartId($conn){
 }
 
 function cartGen($faker, $conn, $userId) {
-    $order = rand(0, 3);
+    $order = rand(1, 1);
     
     $insert_query = "INSERT INTO cart (userId, productId, quantity) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($insert_query);

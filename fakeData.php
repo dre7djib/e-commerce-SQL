@@ -1,15 +1,15 @@
 <?php
-// Include the Composer autoloader
+
 require 'vendor/autoload.php';
 require __DIR__ . '/userTable.php';
-require __DIR__ . '/adressTable.php';
-include_once 'productTable.php';
+require __DIR__ . '/adressTable.php'; 
+require __DIR__ . '/productTable.php';
 require __DIR__ . '/cartTable.php';
+require __DIR__ . '/commandTable.php';
 
-// Import the Faker namespace
+// Import Faker
 use Faker\Factory;
 
-// Create a Faker instance
 $faker = Factory::create();
 
 $servername = "localhost:8889";
@@ -23,12 +23,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-//userGen($faker, $conn);
-//adressGen($faker,$conn,getUserId($conn));
-getProductName($conn,11);
-cartGen($faker,$conn,getRandomUserId($conn));
+// userGen($faker, $conn); // Générateur pour la table user
+// addressGen($faker, $conn, getUserId($conn)); // Générateur pour la table address
+//cartGen($faker, $conn, getRandomUserId($conn)); // Générateur pour la table cart
+//commandGen($faker,$conn,getRandomUserId($conn),getAddressByUserId($conn, $userId),getRandomProductId($conn)); // Générateur pour la table command
 
 
-// Close the database connection when done
 $conn->close();
 ?>

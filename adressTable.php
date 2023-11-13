@@ -21,4 +21,23 @@ function adressGen($faker,$conn,$userId){
     }
 }
 
+function getAddressByUserId($conn, $userId) {
+    $query = "SELECT street, city, state, postal_code FROM address WHERE userId = ?";
+    $stmt = $conn->prepare($query);
+
+    if (!$stmt) {
+        echo "Erreur de préparation de la requête : " . $conn->error;
+        return null;
+    }
+
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $stmt->bind_result($street, $city, $state, $postalCode);
+    $stmt->fetch();
+    $stmt->close();
+
+    // Return the formatted address
+    return "$street, $city, $state $postalCode";
+}
+
 ?>
