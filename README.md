@@ -8,7 +8,7 @@ The two language i used for the projects are php in the scripts and sql for the 
 
 ### Instalation
 1. Install php
-2. Install ***MAMP*** (for MacOS) or ***XAMPP*** (for everything)
+2. Install [***MAMP***](https://www.mamp.info/en/mamp-pro/mac/) (for MacOS) or [***XAMPP***](https://www.apachefriends.org/fr/index.html) (for everything)
 3. `git clone https://github.com/dre7djib/e-commerce-SQL`
 
 The structure of the sql is in e-commerce.sql
