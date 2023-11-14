@@ -1,13 +1,13 @@
 <?php
 
-function commandGen($faker,$conn, $userId,$addressId,$productId) {
+function commandGen($faker,$conn, $userId,$addressId,$productId) { // Generate Data for the table command
 
     // Generate random dates for delivery and purchase
     $orderDate = $faker->dateTimeBetween('-1 month', 'now')->format('Y-m-d');
     $deliveryDate = $faker->dateTimeBetween($orderDate, '+1 month')->format('Y-m-d');
 
     // Select a random product and quantity
-    $quantity = rand(1, 5); // Adjust the range as needed
+    $quantity = rand(1, 5);
 
     // Insert the order into the command table
     $insertQuery = "INSERT INTO command (userId, productId, quantity, orderDate, delivery, addressId) VALUES (?, ?, ?, ?, ?, ?)";
@@ -25,8 +25,6 @@ function commandGen($faker,$conn, $userId,$addressId,$productId) {
     } else {
         echo "Error: " . $insertQuery . "<br>" . $conn->error;
     }
-
-    // Close the statement
     $stmt->close();
 }
 

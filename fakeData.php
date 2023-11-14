@@ -13,6 +13,7 @@ use Faker\Factory;
 
 $faker = Factory::create();
 
+// Create the connection betwenn the script and the database
 $servername = "localhost:8889";
 $username = "root";
 $password = "root";

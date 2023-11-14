@@ -1,14 +1,14 @@
 <?php
 
-function getUserId($conn){
-    // Get User Id 
+function getUserId($conn){ // Get User Id from the table user
+    
     $query = "SELECT MAX(userId) FROM user";
     $result = $conn->query($query);
     
     if ($result) {
-        $row = $result->fetch_row(); // Récupère la première colonne du résultat
-        $maxUserId = $row[0]; // Stocke la valeur maximale dans une variable
-        $result->close(); // Ferme le résultat
+        $row = $result->fetch_row();
+        $maxUserId = $row[0]; 
+        $result->close(); 
     } else {
         echo "Erreur lors de l'exécution de la requête : " . $conn->error;
     }
@@ -16,13 +16,13 @@ function getUserId($conn){
     return $maxUserId;
 }
 
-function getRandomUserId($conn){
+function getRandomUserId($conn){ // Get a Random user Id from the table user
     $maxUser = intval(getUserId($conn));
     $randUserId = rand(1,$maxUser);
     return $randUserId;
 }
 
-function userGen ($faker, $conn) {
+function userGen ($faker, $conn) { // Generate the Data for the table user
 
     // Create Data
     $firstName = $faker->firstName;

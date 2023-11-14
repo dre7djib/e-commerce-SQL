@@ -3,13 +3,13 @@
 
 function adressGen($faker,$conn,$userId){
 
-    // Create Data
+    // Create the data with Faker
     $streetAddress  = $faker->streetAddress;
     $city = $faker->city;
     $state = $faker->state;
     $postcode = $faker->postcode; 
 
-    // Insert Data
+    // Insert the Faker Data
     $insert_query = "INSERT INTO address (street, city, state,  postal_code, userId) VALUES (?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($insert_query);
     $stmt->bind_param("ssssi", $streetAddress, $city, $state, $postcode,$userId);
@@ -21,7 +21,9 @@ function adressGen($faker,$conn,$userId){
     }
 }
 
-function getAddressByUserId($conn, $userId) {
+
+
+function getAddressByUserId($conn, $userId) {      // Get the adress with the user id 
     $query = "SELECT street, city, state, postal_code FROM address WHERE userId = ?";
     $stmt = $conn->prepare($query);
 
