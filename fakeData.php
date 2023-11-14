@@ -7,6 +7,7 @@ require __DIR__ . '/functions/productTable.php';
 require __DIR__ . '/functions/cartTable.php';
 require __DIR__ . '/functions/commandTable.php';
 require __DIR__ . '/functions/invoiceTable.php';
+require __DIR__ . '/paymentTable.php';
 
 // Import Faker
 use Faker\Factory;
@@ -26,10 +27,10 @@ if ($conn->connect_error) {
 }
 
 userGen($faker, $conn); // Générateur pour la table user
-adressGen($faker, $conn, getUserId($conn)); // Générateur pour la table address
-cartGen($faker, $conn, getRandomUserId($conn)); // Générateur pour la table cart
-commandGen($faker,$conn,getRandomUserId($conn),getAddressByUserId($conn, $userId),getRandomProductId($conn)); // Générateur pour la table command
-invoiceGen($conn); // Générateur pour la table invoice
+//adressGen($faker, $conn, getUserId($conn)); // Générateur pour la table address
+//cartGen($faker, $conn, getRandomUserId($conn)); // Générateur pour la table cart
+//commandGen($faker,$conn,getRandomUserId($conn),getAddressByUserId($conn, $userId),getRandomProductId($conn)); // Générateur pour la table command
+//invoiceGen($conn); // Générateur pour la table invoice
 
 $conn->close();
 ?>
